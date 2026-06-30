@@ -31,7 +31,8 @@
     maptracktib) {
 
         ## Set scores overlapping black list to NA
-        resblack <- valr::bed_intersect(currenttrans, blacklisttib)
+        resblack <- valr::bed_intersect(currenttrans, blacklisttib,
+            min_overlap = 0L)
         if (!isTRUE(all.equal(nrow(resblack), 0))) {
             strtransvec <- paste(currenttrans$chrom, currenttrans$start,
                 currenttrans$end, sep = "-")
@@ -48,7 +49,8 @@
         ## low mappability intervals)
         currenttrans$chrom <- as.character(currenttrans$chrom)
         maptracktib$chrom <- as.character(maptracktib$chrom)
-        resmap <- valr::bed_intersect(currenttrans, maptracktib)
+        resmap <- valr::bed_intersect(currenttrans, maptracktib,
+            min_overlap = 0L)
         if (!isTRUE(all.equal(nrow(resmap), 0))) {
             ## Compute strtransvec only if no overlap with black list was found
             if (isTRUE(all.equal(nrow(resblack), 0)))

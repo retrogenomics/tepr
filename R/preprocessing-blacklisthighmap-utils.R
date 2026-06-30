@@ -205,7 +205,7 @@ retrievechrom <- function(genomename, verbose, filterchrom = TRUE) {
         ## Retrieving scores on annotations of strand
         if (verbose) message("\t\t Retrieving scores on annotations of strand") # nolint
         suppressWarnings(annoscores <- valr::bed_intersect(valtib,
-            allwindstrand, suffix = c("", ".window")))
+            allwindstrand, min_overlap = 0L, suffix = c("", ".window")))
 
         rm(valtib, allwindchromtib, allwindstrand)
         if (showmemory) print(gc()) else invisible(gc())
